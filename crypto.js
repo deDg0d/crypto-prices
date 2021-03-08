@@ -1,7 +1,8 @@
 const axios = require('axios')
 const cheerio = require('cheerio')
-const http = require('http')
 var crypto = []
+var names  = []
+var merge  = []
 //axios.get('https://www.coindesk.com/price/bitcoin')
 //.then(res=>{
    // $ = cheerio.load(res.data)
@@ -15,8 +16,17 @@ axios.get('https://coinmarketcap.com/')
     
    var price  = $('div.price___3rj7O ').each((i,e)=>{
    price = $(e).text()
-   crypto[i]= {price}
+   crypto[i]= [price]
 })
+var name = $('p.coin-item-symbol').each((i,e)=>{
+name= $(e).text()
+names[i]= [name]
 
-console.log('bitcoin :' + crypto[0]+'\n'+ 'ethereum :' + crypto[1])
+})
+for(i=0;i<=names.length;i++){   
+  merge[names[i]]=[crypto[i]]
+}
+//console.log('bitcoin :' + crypto[0]+'\n'+ 'ethereum :' + crypto[1])
+
+console.log(merge)
 })
